@@ -64,3 +64,36 @@ module "mod-fn" {
 	storage_account_name = module.mod-storage.name
 	storage_account_access_key =module.mod-storage.primary_access_key
 }
+
+module "mod-vnetSG" {
+	source = "../modules/vnet-sec-group"
+	company = "${var.company}"
+	env = "${var.env}"
+	rg_name = module.mod-rg.name
+	rg_location = module.mod-rg.location	
+}
+module "mod-vnetInRule" {
+	source = "../modules/vnet-sec-rule"
+	company = "${var.company}"
+	env = "${var.env}"
+	rg_name = module.mod-rg.name
+	rg_location = module.mod-rg.location	
+	vnetSG_name = module.mod-vnetSG.name
+}
+module "mod-vnet" {
+	source = "../modules/vnet-sec"
+	company = "${var.company}"
+	env = "${var.env}"
+	rg_name = module.mod-rg.name
+	rg_location = module.mod-rg.location
+	
+}
+
+module "mod-subnet" {
+	source = "../modules/subnet"
+	company = "${var.company}"
+	env = "${var.env}"
+	rg_name = module.mod-rg.name
+	rg_location = module.mod-rg.location
+	vnet_name = "${var.company}-${var.env}-vnet"  	
+} 

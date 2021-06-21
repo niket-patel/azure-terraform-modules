@@ -23,6 +23,7 @@ execute .tf scripts and create/update the resources.
 #assing value to input variables
 terraform apply -var="resourceGroupName=fst-dev-rg" -var="location=eastus"
 terraform apply -var-file="terraform.tfvars"
+terraform apply -auto-approve
 
 # multiple environment
 copy main.tf, terraform.tfvars and variables.tf from dev and copy to sit/uat/prod
