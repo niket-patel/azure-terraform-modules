@@ -97,3 +97,11 @@ module "mod-subnet" {
 	rg_location = module.mod-rg.location
 	vnet_name = "${var.company}-${var.env}-vnet"  	
 } 
+module "mod-fd" {
+	source = "../modules/network/front-door"
+	company = "${var.company}"
+	env = "${var.env}"
+	rg_name = module.mod-rg.name
+	rg_location = module.mod-rg.location
+	fn_host_name = module.mod-fn.defaultHostName
+}
