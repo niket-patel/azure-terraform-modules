@@ -7,12 +7,13 @@ resource "azurerm_frontdoor" "fd" {
     name               = "httpToHttpsRedirect"
     accepted_protocols = ["Http", "Https"]
     patterns_to_match  = ["/*"]
-   frontend_endpoints = ["${var.company}-${var.env}-fd-fep"]
-   redirect_configuration{
-     redirect_type = "Found"
-     redirect_protocol = "HttpsOnly"
-
+    frontend_endpoints = ["${var.company}-${var.env}-fd-fep"]
+    
+    redirect_configuration{
+    redirect_type = "Found"
+    redirect_protocol = "HttpsOnly"
    }
+   
   }
 
   backend_pool_load_balancing {

@@ -23,7 +23,7 @@ validate and check resources and store plan into the file.
 execute .tf scripts and create/update the resources.
 
 #assing value to input variables
-terraform apply -var="resourceGroupName=poc-dev-rg" -var="location=eastus"
+terraform apply -var="resourceGroupName=fst-dev-rg" -var="location=eastus"
 terraform apply -var-file="terraform.tfvars"
 terraform apply -auto-approve
 

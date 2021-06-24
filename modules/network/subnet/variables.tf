@@ -10,7 +10,7 @@ variable "rg_name" {
 variable "rg_location" {
    type        = string
 }
-variable "vnet_name" {
+variable "vnetname" {
   type =string
 }
 

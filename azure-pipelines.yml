@@ -25,6 +25,13 @@ jobs:
         command: 'init'    
         allowTelemetryCollection: true
     - task: TerraformCLI@0
+      displayName: refresh
+      inputs:
+        workingDirectory: $(Build.SourcesDirectory)/${{ parameters.profile }}        
+        command: 'apply'
+        commandOptions: '-refresh-only -auto-approve'    
+        allowTelemetryCollection: true
+    - task: TerraformCLI@0
       displayName: plan
       inputs:
         workingDirectory: $(Build.SourcesDirectory)/${{ parameters.profile }}
