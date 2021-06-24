@@ -1,0 +1,39 @@
+parameters:
+- name: profile
+  type: string
+  displayName: Env Profile
+  default: dev
+  values:
+    - dev
+  
+jobs:
+- job: TerraformBuild
+  timeoutInMinutes: 5
+  steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'      
+        workingDirectory: $(Build.SourcesDirectory)/${{ parameters.profile }}
+    - task: TerraformInstaller@0
+      displayName: Install
+      inputs:
+        terraformVersion: 'latest'
+    - task: TerraformCLI@0
+      displayName: init
+      inputs:
+        workingDirectory: $(Build.SourcesDirectory)/${{ parameters.profile }}        
+        command: 'init'    
+        allowTelemetryCollection: true
+    - task: TerraformCLI@0
+      displayName: plan
+      inputs:
+        workingDirectory: $(Build.SourcesDirectory)/${{ parameters.profile }}
+        command: 'plan'
+        allowTelemetryCollection: true
+    - task: TerraformCLI@0
+      displayName: apply
+      inputs:
+        workingDirectory: $(Build.SourcesDirectory)/${{ parameters.profile }}
+        command: 'apply'
+        commandOptions: '-auto-approve'
+        allowTelemetryCollection: true
